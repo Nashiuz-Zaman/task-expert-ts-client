@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .primary-theme {
+    @apply bg-primary border-primary active:bg-primaryDark active:border-primaryDark lg:hover:bg-primaryDark lg:hover:border-primaryDark text-white;
+  }
+
+  .primary-outlined-theme {
+    @apply border-primary active:border-primaryDark lg:hover:border-primaryDark text-primary active:text-primaryDark lg:hover:text-primaryDark;
+  }
+
+  .black-white-theme {
+    @apply bg-neutral-900 border-neutral-900 text-white;
+  }
+
+  .white-black-theme {
+    @apply bg-white border-neutral-300 shadow-small text-neutral-900;
+  }
+
+  .red-theme {
+    @apply bg-red-600 border-red-600 text-white active:bg-red-700 active:border-red-700 lg:hover:bg-red-700 lg:hover:border-red-700;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2.5rem;
+}
+
+body {
+  line-height: 1 !important;
+}
+
+::selection {
+  @apply bg-neutral-800 text-white;
+}
+
+button::selection {
+  color: initial;
+  @apply bg-transparent;
+}
+
+a:link::selection,
+a:visited::selection {
+  color: auto;
+  @apply bg-transparent;
+}
