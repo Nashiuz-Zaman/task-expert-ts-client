@@ -2,7 +2,7 @@ import tailwindScrollbar from "tailwind-scrollbar";
 
 /** @type {import('tailwindcss').Config} */
 
-const config = {
+const config: import("tailwindcss").Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -63,7 +63,7 @@ const config = {
         small: "0 7px 20px -10px rgba(0,0,0,0.15)",
       },
       transitionDuration: {
-        default: "150ms",
+        default: "200ms",
       },
       colors: {
         primary: "#ff8631",
@@ -71,16 +71,9 @@ const config = {
         primaryDark: "#e6792c",
         primaryLight: "#ff9246",
         primaryLightest: "#ffdbc1",
-        textPrimary: "#1C1B1B",
-        textMediumLight: "#1c1b1bcc",
-        textLight: "#1c1b1b99",
-        
-        
-      },
-
-      borderRadius: {
-        default: "5px",
-        defaultLg: "10px",
+        textMainColor: "#1C1B1B",
+        textMdColor: "#1c1b1bcc",
+        textLightColor: "#1c1b1b99",
       },
     },
   },

@@ -19,8 +19,12 @@
     @apply bg-white border-neutral-300 shadow-small text-neutral-900;
   }
 
-  .red-theme {
+  .danger-theme {
     @apply bg-red-600 border-red-600 text-white active:bg-red-700 active:border-red-700 lg:hover:bg-red-700 lg:hover:border-red-700;
+  }
+
+  .success-theme {
+    @apply bg-green-600 border-green-600 text-white active:bg-green-700 active:border-green-700 lg:hover:bg-green-700 lg:hover:border-green-700;
   }
 }
 
