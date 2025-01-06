@@ -11,7 +11,7 @@ const createRegex = (str: string): RegExp => {
   } else {
     const parts = str.split("-");
 
-    return new RegExp(`${parts[0]}-${lastPart}`);
+    return new RegExp(` ${parts[0]}-${lastPart} `);
   }
 };
 
