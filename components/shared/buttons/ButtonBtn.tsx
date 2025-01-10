@@ -1,46 +1,41 @@
-// component
-// import LoadingSpinner from "../../shared/LoadingSpinner/LoadingSpinner";
+"use client";
 
-// type
-interface Props {
-  text: string;
-  onClickFunction:
-    | (() => void)
-    | ((event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
-    | undefined;
-  colorTheme: string;
-  modifyClasses: string;
-  loading?: boolean;
+// utils
+import modifyComponentClassName from "@/utils/modifyComponentClassName";
+
+interface IProps extends IExtraClassNames, IOnClickFunctionBtn {
+  children: React.ReactNode;
   disabled?: boolean;
+  id?: string;
+  type?: "submit" | "reset" | "button";
+  title?: string;
 }
 
 const ButtonBtn = ({
-  text,
+  children,
   onClickFunction,
-  colorTheme = "primary",
-  modifyClasses = "",
-  loading = false,
+  className = "",
   disabled = false,
-}: Props) => {
-  const colorThemeClass = `${colorTheme}Classes`;
-
-  const allClasses = `block min-w-[6rem] w-max capitalize transition-all duration-default rounded-defaultLg text-center text-sm sm:text-base px-4 py-2 active:scale-[0.98] disabled:opacity-60 disabled:scale-100 disabled:cursor-not-allowed font-medium border ${colorThemeClass} ${modifyClasses}`;
+  id = "",
+  type = "submit",
+  title = "",
+}: IProps) => {
+  const allClasses = modifyComponentClassName(
+    className,
+    "focus:outline-none flex items-center justify-center gap-2 w-max capitalize transition-all duration-default rounded-md text-center px-6 py-2 lg:py-4 lg:px-10 active:scale-[0.95] disabled:opacity-60 disabled:scale-100 disabled:hover:!scale-100 disabled:!active:scale-100 font-medium disabled:cursor-not-allowed border"
+  );
 
   return (
     <button
+      title={title}
+      id={id}
+      type={type}
       style={{ backfaceVisibility: "hidden" }}
       disabled={disabled}
       onClick={onClickFunction}
-      // decide the design of button according to the props
       className={allClasses}
     >
-      {/* {loading && (
-        <LoadingSpinner
-          onlyLoader={true}
-          loaderSizeClass="text-xl xl:text-2xl"
-        />
-      )} */}
-      {!loading && text}
+      {children}
     </button>
   );
 };

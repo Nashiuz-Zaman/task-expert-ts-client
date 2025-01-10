@@ -1,11 +1,12 @@
 // components
 // import Footer from '@/components/shared/Footer/Footer';
-// import Header from '@/components/shared/Header/Header';
+
+import { Header } from "@/components/shared";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen flex flex-col max-w-[120rem] mx-auto overflow-x-hidden">
-      {/* <Header /> */}
+      <Header />
       <main>{children}</main>
       {/* <Footer /> */}
     </div>

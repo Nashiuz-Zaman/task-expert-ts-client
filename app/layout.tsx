@@ -8,6 +8,8 @@ import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Slide } from "react-toastify";
+ 
+// redux store
 import StoreProvider from "@/lib/redux/StoreProvider";
 
 // init font
@@ -26,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} text-textMainColor antialiased`}>
+      <body className={`${inter.className} text-neutral-800 antialiased`}>
         <StoreProvider>
           {/* react toastify */}
           <ToastContainer
