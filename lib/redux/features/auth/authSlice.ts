@@ -3,8 +3,16 @@
 // import
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface AuthState {
-  profileData: object | null;
+interface User {
+  name: string;
+  email: string;
+  password: string;
+  image: string;
+  role: string;
+}
+
+export interface AuthState {
+  profileData: User | null;
   profileLoading: boolean;
 }
 
@@ -19,13 +27,13 @@ const authSlice = createSlice({
   reducers: {
     setProfileData: (
       state: AuthState,
-      { payload }: PayloadAction<object | null>
+      { payload }: PayloadAction<AuthState["profileData"]>
     ) => {
       state.profileData = payload;
     },
     setProfileLoading: (
       state: AuthState,
-      { payload }: PayloadAction<boolean>
+      { payload }: PayloadAction<AuthState["profileLoading"]>
     ) => {
       state.profileLoading = payload;
     },

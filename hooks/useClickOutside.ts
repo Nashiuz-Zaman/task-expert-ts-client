@@ -1,26 +1,29 @@
-'use client';
+"use client";
 
 // react
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-const useClickOutside = (condition, callbackFunc) => {
-   useEffect(() => {
-      let clickEventTimer;
+const useClickOutside = (
+  condition: boolean,
+  callbackFunc: (e: MouseEvent) => void
+): void => {
+  useEffect(() => {
+    let clickEventTimer: ReturnType<typeof setTimeout>;
 
-      if (condition) {
-         clickEventTimer = setTimeout(() => {
-            window.addEventListener('click', callbackFunc);
-            clearTimeout(clickEventTimer);
-         }, 250);
-      } else {
-         window.removeEventListener('click', callbackFunc);
-      }
+    if (condition) {
+      clickEventTimer = setTimeout(() => {
+        window.addEventListener("click", callbackFunc);
+        clearTimeout(clickEventTimer);
+      }, 200);
+    } else {
+      window.removeEventListener("click", callbackFunc);
+    }
 
-      return () => {
-         clearTimeout(clickEventTimer);
-         window.removeEventListener('click', callbackFunc);
-      };
-   }, [condition, callbackFunc]);
+    return () => {
+      clearTimeout(clickEventTimer);
+      window.removeEventListener("click", callbackFunc);
+    };
+  }, [condition, callbackFunc]);
 };
 
 export default useClickOutside;

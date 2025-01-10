@@ -1,27 +1,19 @@
-'use client';
+"use client";
 
 // redux
-import { useSelector, useDispatch } from 'react-redux';
-import {
-   openNav,
-   closeNav,
-} from '@/lib/redux/features/mobileNav/mobileNavSlice';
-import { setBackdropOpen } from '@/lib/redux/features/backdrop/backdropSlice';
+import { useDispatch } from "react-redux";
+import { setMobileNavOpen } from "@/lib/redux/features/mobileNav/mobileNavSlice";
+import { setBackdropOpen } from "@/lib/redux/features/backdrop/backdropSlice";
 
 const useMobileNavigation = () => {
-   const mobileNavOpen = useSelector(store => store.mobileNav.mobileNavOpen);
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-   const openMobileNav = () => {
-      dispatch(openNav());
-      dispatch(setBackdropOpen(true));
-   };
-   const closeMobileNav = () => {
-      dispatch(closeNav());
-      dispatch(setBackdropOpen(false));
-   };
+  const setMobileNavBackdropOpen = (open: boolean): void => {
+    dispatch(setMobileNavOpen(open));
+    dispatch(setBackdropOpen(open));
+  };
 
-   return { mobileNavOpen, openMobileNav, closeMobileNav };
+  return { setMobileNavBackdropOpen };
 };
 
 export default useMobileNavigation;

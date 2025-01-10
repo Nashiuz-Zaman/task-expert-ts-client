@@ -1,5 +1,6 @@
 // components
 import InnerContainer from "@/components/containers/InnerContainer";
+import { About } from "@/components/page-specific/home";
 import Banner from "@/components/shared/Banner/Banner";
 // import LoginModal from '@/components/forms/LoginModal/LoginModal';
 // import RegistrationModal from '@/components/forms/RegistrationModal/RegistrationModal';
@@ -17,12 +18,14 @@ const Home = () => {
         </InnerContainer>
       </section>
 
+      <section id="learn-more" className="mb-sectionGapMd md:mb-sectionGapLg">
+        <InnerContainer>
+          <About />
+        </InnerContainer>
+      </section>
+
       {/* 
-         <section id='learn-more' className='mb-sectionGapMd md:mb-sectionGapLg'>
-            <InnerContainer>
-               <About />
-            </InnerContainer>
-         </section>
+        
 
          <section id='features' className='mb-sectionGapMd md:mb-sectionGapLg'>
             <InnerContainer>

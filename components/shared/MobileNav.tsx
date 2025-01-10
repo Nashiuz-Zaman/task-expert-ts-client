@@ -1,34 +1,36 @@
 "use client";
 
 // react
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 // next
 import Link from "next/link";
 
 // components
-import { CloseBtn, ButtonBtn, MobileMenuBtn } from "./buttons";
+import { CloseBtn, MobileMenuBtn } from "./buttons";
 import BrandLogo from "./BrandLogo";
 
 // hook
+import { useClickOutside } from "@/hooks";
 // import useMobileNavigation from "@/hooks/useMobileNavigation";
 // import useEscapeClose from "@/hooks/useEscapeClose";
 // import useLoginMethods from "@/hooks/useLoginMethods";
 // import useClickOutside from "@/hooks/useClickOutside";
 // import useStopScrolling from "@/hooks/useStopScrolling";
 
-type OnClickFunction = IOnClickFunctionGeneric["onClickFunction"];
 // redux
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/redux/store";
 
 // data
 import logoPrimary from "@/assets/websiteLogo/logo-primary.webp";
+import { useMobileNavigation } from "@/hooks";
+import modifyComponentClassName from "@/utils/modifyComponentClassName";
 
 const MobileNav = ({ className = "" }: IExtraClassNames) => {
   const { profileData } = useSelector((store: RootState) => store.auth);
-  // const { mobileNavOpen, openMobileNav, closeMobileNav } =
-  //   useMobileNavigation();
+  const { mobileNavOpen } = useSelector((store: RootState) => store.mobileNav);
+  const { setMobileNavBackdropOpen } = useMobileNavigation();
   // const { handleLogout } = useLoginMethods();
   // const { stopYAxisScrolling } = useStopScrolling();
 
@@ -36,13 +38,13 @@ const MobileNav = ({ className = "" }: IExtraClassNames) => {
   //   stopYAxisScrolling(mobileNavOpen);
   // }, [mobileNavOpen, stopYAxisScrolling]);
 
-  // const handleClickOutside: OnClickFunction = (e) => {
-  //   if (!(e.target as Element).closest(".mobilenav-focus")) {
-  //     // closeMobileNav();
-  //   }
-  // };
+  const handleClickOutside: (e: MouseEvent) => void = (e) => {
+    if (!(e.target as Element).closest(".mobilenav-focus")) {
+      setMobileNavBackdropOpen(false);
+    }
+  };
 
-  // useClickOutside(mobileNavOpen, handleClickOutside);
+  useClickOutside(mobileNavOpen, handleClickOutside);
   // useEscapeClose(closeMobileNav);
 
   // common classes
@@ -51,17 +53,24 @@ const MobileNav = ({ className = "" }: IExtraClassNames) => {
 
   return (
     //  mobile nav starts here
-    <div className="mobilenav-focus">
-      <MobileMenuBtn onClickFunction={() => {}} />
+    <div>
+      <MobileMenuBtn
+        onClickFunction={() => {
+          setMobileNavBackdropOpen(true);
+        }}
+      />
 
       <nav
-        className={`block h-screen fixed top-0 right-0 w-full sm:w-[50%] md:w-[40%] lg:w-[35%] 2xl:w-[20%] translate-x-full origin-center transition-all duration-default z-40 ${
-          false ? "!translate-x-0" : ""
-        } p-8 bg-white ${className}`}
+        className={modifyComponentClassName(
+          className,
+          `mobilenav-focus block h-screen fixed top-0 right-0 w-full sm:w-[50%] md:w-[40%] lg:w-[35%] 2xl:w-[20%] translate-x-full origin-center transition-all duration-default z-40 ${
+            mobileNavOpen ? "!translate-x-0" : ""
+          } p-8 bg-white`
+        )}
       >
         {/* X cross button to close nav */}
         <CloseBtn
-          // onClickFunction={closeMobileNav}
+          onClickFunction={() => setMobileNavBackdropOpen(false)}
           className="mb-11"
         />
 

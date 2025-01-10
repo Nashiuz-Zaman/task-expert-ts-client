@@ -5,7 +5,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface SignupSlice {
   signupLoading: boolean;
-  signupErrors: string | null;
+  signupErrors: string | string[] | null;
 }
 
 const initialState: SignupSlice = {
