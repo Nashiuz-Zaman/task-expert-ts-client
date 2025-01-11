@@ -6,11 +6,11 @@ import modifyComponentClassName from "@/utils/modifyComponentClassName";
 
 // type
 import { StaticImageData } from "next/image";
-interface Props extends IExtraClassNames {
+interface IProps extends IExtraClassNames {
   logo: StaticImageData;
 }
 
-const Header = ({ logo, className = "" }: Props) => {
+const Header = ({ logo, className = "" }: IProps) => {
   return (
     <div
       className={modifyComponentClassName(className, "pt-5 lg:pt-8 bg-white")}

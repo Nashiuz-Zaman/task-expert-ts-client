@@ -5,13 +5,14 @@ import { useEffect, useState } from "react";
 
 // components
 import { Carousel1, Text } from "@/components/shared";
-import { LinkBtn } from "@/components/shared/buttons";
+import { LinkBtn } from "@/components/buttons";
 
 // hooks
 import useMediaQueryMatcher from "@/hooks/useMediaQueryMatcher";
 
 // data
 import { aboutContent } from "@/uiData/pages/home";
+import IcfyIcon from "@/components/shared/IcfyIcon";
 
 const About = () => {
   const { isComputer } = useMediaQueryMatcher();
@@ -43,7 +44,7 @@ const About = () => {
       href="#features"
       className="mx-auto md:mx-0 md:col-span-2 rounded-full primary-theme"
     >
-      Discover Features
+      <IcfyIcon icon="weui:discover-filled" className="text-2xl" /> Discover Features
     </LinkBtn>
   );
 

@@ -1,8 +1,15 @@
 export const footerOptions = [
-   { id: 0, text: 'About The App', url: '/#learn-more' },
-   { id: 1, text: 'Our Features', url: '/#features' },
-   { id: 2, text: 'FAQ', url: '/#faq' },
-   { id: 3, text: 'Meet The Developer', url: 'https://nashiuz-zaman.web.app/' },
+  { text: "About The App", href: "/#learn-more" },
+  { text: "Our Features", href: "/#features" },
+  { text: "FAQ", href: "/#faq" },
+  { text: "Meet The Developer", href: "https://nashiuz-zaman.web.app/" },
+];
+
+export const socialMediaOptions = [
+  { icon: "ic:baseline-facebook", href: "https://www.facebook.com" },
+  { icon: "pajamas:twitter", href: "https://www.twitter.com" },
+  { icon: "mingcute:instagram-line", href: "https://www.instagram.com" },
+  { icon: "mingcute:youtube-fill", href: "https://www.youtube.com" },
 ];
 
 export const currentYear = new Date().getFullYear();

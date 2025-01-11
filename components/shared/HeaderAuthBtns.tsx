@@ -8,6 +8,7 @@ import modifyComponentClassName from "@/utils/modifyComponentClassName";
 import { AuthState } from "@/lib/redux/features/auth/authSlice";
 import IcfyIcon from "./IcfyIcon";
 import InnerContainer from "../containers/InnerContainer";
+import { ButtonBtnTrans } from "@/components/buttons";
 
 // types
 interface Data {
@@ -20,7 +21,7 @@ interface Functions {
   openSignupFormWithBackdrop: (withBackdrop?: boolean) => void;
 }
 
-interface Props extends IExtraClassNames {
+interface IProps extends IExtraClassNames {
   data: Data | null;
   functions: Functions | null;
 }
@@ -29,7 +30,7 @@ const HeaderAuthBtns = ({
   data = null,
   functions = null,
   className = "",
-}: Props) => {
+}: IProps) => {
   const btnClasses = "hover:underline";
 
   return (
@@ -50,18 +51,23 @@ const HeaderAuthBtns = ({
         {/* if no user then login and registration btns are shown */}
         {!data?.profileLoading && !data?.profileData && (
           <>
-            <button
+            <ButtonBtnTrans
               className={btnClasses}
-              onClick={() => functions?.openLoginFormWithBackdrop()}
+              onClickFunction={() => functions?.openLoginFormWithBackdrop()}
             >
-              Login
-            </button>
-            <button
+              <IcfyIcon icon="stash:signin-alt" className="text-2xl" /> Login
+            </ButtonBtnTrans>
+            |
+            <ButtonBtnTrans
               className={btnClasses}
-              onClick={() => functions?.openSignupFormWithBackdrop()}
+              onClickFunction={() => functions?.openLoginFormWithBackdrop()}
             >
+              <IcfyIcon
+                icon="material-symbols-light:app-registration-rounded"
+                className="text-2xl"
+              />{" "}
               Register
-            </button>
+            </ButtonBtnTrans>
           </>
         )}
         {/* if user available then show name and go to dashboard and logout btns */}

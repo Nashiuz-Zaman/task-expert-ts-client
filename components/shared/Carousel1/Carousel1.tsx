@@ -3,12 +3,12 @@
 // custom hook
 import useCarousel1, { ImageData } from "./useCarousel1";
 
-interface Props {
+interface IProps {
   imagesData: ImageData[];
   interval?: number;
 }
 
-const Carousel1 = ({ imagesData, interval = 3000 }: Props) => {
+const Carousel1 = ({ imagesData, interval = 3000 }: IProps) => {
   const { centerSlide, leftSlide, rightSlide } = useCarousel1(
     imagesData,
     interval

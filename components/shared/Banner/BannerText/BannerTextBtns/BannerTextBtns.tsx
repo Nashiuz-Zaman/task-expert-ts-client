@@ -1,8 +1,9 @@
 "use client";
 
 // components
-import ButtonBtn from "@/components/shared/buttons/ButtonBtn";
-import LinkBtn from "@/components/shared/buttons/LinkBtn";
+import ButtonBtn from "@/components/buttons/ButtonBtn";
+import LinkBtn from "@/components/buttons/LinkBtn";
+import IcfyIcon from "@/components/shared/IcfyIcon";
 import modifyComponentClassName from "@/utils/modifyComponentClassName";
 
 // hooks
@@ -22,7 +23,7 @@ const BannerTextBtns = ({ className = "" }: IExtraClassNames) => {
         href="#learn-more"
         className="!duration-[300ms] primary-theme rounded-full"
       >
-        Let&apos;s Explore
+        <IcfyIcon icon="radix-icons:magnifying-glass" /> Let&apos;s Explore
       </LinkBtn>
 
       <ButtonBtn

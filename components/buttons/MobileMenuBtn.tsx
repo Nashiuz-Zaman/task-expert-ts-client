@@ -1,6 +1,6 @@
 // component
 import modifyComponentClassName from "@/utils/modifyComponentClassName";
-import IcfyIcon from "../IcfyIcon";
+import IcfyIcon from "../shared/IcfyIcon";
 
 const MobileMenuBtn = ({
   onClickFunction,

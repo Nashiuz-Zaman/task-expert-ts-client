@@ -1,11 +1,11 @@
 // utils
 import modifyComponentClassName from "@/utils/modifyComponentClassName";
 
-interface Props extends IExtraClassNames {
+interface IProps extends IExtraClassNames {
   text: string;
 }
 
-const Text = ({ text, className = "" }: Props) => {
+const Text = ({ text, className = "" }: IProps) => {
   return (
     <p
       className={modifyComponentClassName(

@@ -7,7 +7,7 @@
 import Link from "next/link";
 
 // components
-import { CloseBtn, MobileMenuBtn } from "./buttons";
+import { CloseBtn, MobileMenuBtn } from "../buttons";
 import BrandLogo from "./BrandLogo";
 
 // hook

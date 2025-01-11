@@ -1,4 +1,4 @@
-import IcfyIcon from "../IcfyIcon";
+import IcfyIcon from "../shared/IcfyIcon";
 
 const CloseBtn = ({
   onClickFunction,
