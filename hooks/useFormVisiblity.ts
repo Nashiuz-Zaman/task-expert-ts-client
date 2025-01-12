@@ -1,143 +1,100 @@
-'use client';
+"use client";
 
 // react
-import { useCallback } from 'react';
+import { useCallback } from "react";
 
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import {
-   setLoginFormOpen,
-   setRegistrationFormOpen,
-   setTaskCreateFormOpen,
-   setTaskEditFormOpen,
-   setPasswordResetFormOpen,
-} from '@/lib/redux/features/form/formSlice';
-import { setBackdropOpen } from '@/lib/redux/features/backdrop/backdropSlice';
-import { setShowTaskDetailsPanel } from '@/lib/redux/features/task/taskSlice';
+  setTaskCreateFormOpen,
+  setTaskEditFormOpen,
+} from "@/lib/redux/features/form/formSlice";
+
+import { setLoginFormOpen } from "@/lib/redux/features/login/loginSlice";
+import { setSignupFormOpen } from "@/lib/redux/features/signup/signupSlice";
+import { setPasswordResetFormOpen } from "@/lib/redux/features/passwordReset/passwordResetSlice";
+import { setBackdropOpen } from "@/lib/redux/features/backdrop/backdropSlice";
+// import { setShowTaskDetailsPanel } from "@/lib/redux/features/task/taskSlice";
 
 const useFormVisiblity = () => {
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-   const openLoginFormWithBackdrop = useCallback(
-      (withBackdrop = true) => {
-         dispatch(setLoginFormOpen(true));
+  const setLoginFormAndBackdropOpen = useCallback(
+    (formOpen: boolean, backdropOpen: boolean | null = null) => {
+      dispatch(setLoginFormOpen(formOpen));
 
-         if (withBackdrop) {
-            dispatch(setBackdropOpen(true));
-         }
-      },
-      [dispatch]
-   );
+      if (backdropOpen !== null) {
+        dispatch(setBackdropOpen(backdropOpen));
+      }
+    },
+    [dispatch]
+  );
 
-   const closeLoginFormWithBackdrop = useCallback(
-      (withBackdrop = true) => {
-         dispatch(setLoginFormOpen(false));
+  const setSignupFormAndBackdropOpen = useCallback(
+    (formOpen: boolean, backdropOpen: boolean | null = null) => {
+      dispatch(setSignupFormOpen(formOpen));
 
-         if (withBackdrop) {
-            dispatch(setBackdropOpen(false));
-         }
-      },
-      [dispatch]
-   );
+      if (backdropOpen !== null) {
+        dispatch(setBackdropOpen(backdropOpen));
+      }
+    },
+    [dispatch]
+  );
 
-   const openSignupFormWithBackdrop = useCallback(
-      (withBackdrop = true) => {
-         dispatch(setRegistrationFormOpen(true));
+  const setTaskCreateFormOpenF = useCallback(
+    (formOpen: boolean): void => {
+      dispatch(setTaskCreateFormOpen(formOpen));
+    },
+    [dispatch]
+  );
 
-         if (withBackdrop) {
-            dispatch(setBackdropOpen(true));
-         }
-      },
-      [dispatch]
-   );
+  const setTaskEditFormOpenF = useCallback(
+    (formOpen: boolean): void => {
+      dispatch(setTaskEditFormOpen(formOpen));
+    },
+    [dispatch]
+  );
 
-   const closeSignupFormWithBackdrop = useCallback(
-      (withBackdrop = true) => {
-         dispatch(setRegistrationFormOpen(false));
+  const setPasswordResetFormAndBackdropOpen = useCallback(
+    (formOpen: boolean, backdropOpen: boolean | null = null) => {
+      dispatch(setPasswordResetFormOpen(formOpen));
+      
+      if (backdropOpen !== null) {
+        dispatch(setBackdropOpen(backdropOpen));
+      }
+    },
+    [dispatch]
+  );
 
-         if (withBackdrop) {
-            dispatch(setBackdropOpen(false));
-         }
-      },
-      [dispatch]
-   );
+  //   const openTaskDetailsPanel = useCallback(
+  //     (withBackdrop = true): void => {
+  //       dispatch(setShowTaskDetailsPanel(true));
 
-   const openTaskCreateForm = useCallback(() => {
-      dispatch(setTaskCreateFormOpen(true));
-   }, [dispatch]);
+  //       if (withBackdrop) {
+  //         dispatch(setBackdropOpen(true));
+  //       }
+  //     },
+  //     [dispatch]
+  //   );
 
-   const closeTaskCreateForm = useCallback(() => {
-      dispatch(setTaskCreateFormOpen(false));
-   }, [dispatch]);
+  //   const closeTaskDetailsPanel = useCallback(
+  //     (withBackdrop = true): void => {
+  //       dispatch(setShowTaskDetailsPanel(false));
 
-   const openTaskEditForm = useCallback(() => {
-      dispatch(setTaskEditFormOpen(true));
-      dispatch(setBackdropOpen(true));
-   }, [dispatch]);
+  //       if (withBackdrop) {
+  //         dispatch(setBackdropOpen(false));
+  //       }
+  //     },
+  //     [dispatch]
+  //   );
 
-   const closeTaskEditForm = useCallback(() => {
-      dispatch(setTaskEditFormOpen(false));
-      dispatch(setBackdropOpen(false));
-   }, [dispatch]);
-
-   const openPasswordResetFormWithBackdrop = useCallback(
-      (withBackdrop = true) => {
-         dispatch(setPasswordResetFormOpen(true));
-
-         if (withBackdrop) {
-            dispatch(setBackdropOpen(true));
-         }
-      },
-      [dispatch]
-   );
-
-   const closePasswordResetFormWithBackdrop = useCallback(
-      (withBackdrop = true) => {
-         dispatch(setPasswordResetFormOpen(false));
-
-         if (withBackdrop) {
-            dispatch(setBackdropOpen(false));
-         }
-      },
-      [dispatch]
-   );
-
-   const openTaskDetailsPanel = useCallback(
-      (withBackdrop = true) => {
-         dispatch(setShowTaskDetailsPanel(true));
-
-         if (withBackdrop) {
-            dispatch(setBackdropOpen(true));
-         }
-      },
-      [dispatch]
-   );
-
-   const closeTaskDetailsPanel = useCallback(
-      (withBackdrop = true) => {
-         dispatch(setShowTaskDetailsPanel(false));
-
-         if (withBackdrop) {
-            dispatch(setBackdropOpen(false));
-         }
-      },
-      [dispatch]
-   );
-
-   return {
-      openLoginFormWithBackdrop,
-      openSignupFormWithBackdrop,
-      closeLoginFormWithBackdrop,
-      closeSignupFormWithBackdrop,
-      openTaskCreateForm,
-      closeTaskCreateForm,
-      openTaskEditForm,
-      closeTaskEditForm,
-      openPasswordResetFormWithBackdrop,
-      closePasswordResetFormWithBackdrop,
-      openTaskDetailsPanel,
-      closeTaskDetailsPanel,
-   };
+  return {
+    setLoginFormAndBackdropOpen,
+    setSignupFormAndBackdropOpen,
+    setPasswordResetFormAndBackdropOpen,
+    setTaskCreateFormOpenF,
+    setTaskEditFormOpenF,
+  };
 };
 
 export default useFormVisiblity;

@@ -4,15 +4,15 @@
 import { useEffect, useState } from "react";
 
 // components
-import { Carousel1, Text } from "@/components/shared";
+import { Carousel1, Carousel2, Text } from "@/components/shared";
 import { LinkBtn } from "@/components/buttons";
+import IcfyIcon from "@/components/shared/IcfyIcon";
 
 // hooks
 import useMediaQueryMatcher from "@/hooks/useMediaQueryMatcher";
 
 // data
 import { aboutContent } from "@/uiData/pages/home";
-import IcfyIcon from "@/components/shared/IcfyIcon";
 
 const About = () => {
   const { isComputer } = useMediaQueryMatcher();
@@ -44,27 +44,28 @@ const About = () => {
       href="#features"
       className="mx-auto md:mx-0 md:col-span-2 rounded-full primary-theme"
     >
-      <IcfyIcon icon="weui:discover-filled" className="text-2xl" /> Discover Features
+      <IcfyIcon icon="weui:discover-filled" className="text-2xl" /> Discover
+      Features
     </LinkBtn>
   );
 
   // if screen is smaller than 1024px
-  //   if (isClient && isComputer === false) {
-  //     return (
-  //       <div className="text-center grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-x-6 md:text-left items-center">
-  //         {heading}
-  //         {btn}
+  if (isClient && isComputer === false) {
+    return (
+      <div className="text-center grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-x-6 md:text-left items-center">
+        {heading}
+        {btn}
 
-  //         <Carousel2
-  //           imagesData={images}
-  //           modifyClasses="md:order-4 md:self-stretch"
-  //           interval={3500}
-  //         />
+        <Carousel2
+          imagesData={images}
+          className="md:order-4 md:self-stretch"
+          interval={3500}
+        />
 
-  //         {description}
-  //       </div>
-  //     );
-  //   }
+        {description}
+      </div>
+    );
+  }
 
   // if screen is at least 1024px
   if (isClient && isComputer === true) {

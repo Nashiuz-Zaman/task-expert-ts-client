@@ -5,12 +5,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface LoginState {
   loginLoading: boolean;
-  loginErrors: string | null;
+  loginErrors: string[] | null;
+  loginFormOpen: boolean;
 }
 
 const initialState: LoginState = {
   loginLoading: false,
   loginErrors: null,
+  loginFormOpen: false,
 };
 
 const loginSlice = createSlice({
@@ -19,19 +21,25 @@ const loginSlice = createSlice({
   reducers: {
     setLoginLoading: (
       state: LoginState,
-      { payload }: PayloadAction<boolean>
+      { payload }: PayloadAction<LoginState["loginLoading"]>
     ): void => {
       state.loginLoading = payload;
     },
     setLoginErrors: (
       state: LoginState,
-      { payload }: PayloadAction<string | null>
+      { payload }: PayloadAction<LoginState["loginErrors"]>
     ): void => {
       state.loginErrors = payload;
+    },
+    setLoginFormOpen: (
+      state: LoginState,
+      { payload }: PayloadAction<LoginState["loginFormOpen"]>
+    ): void => {
+      state.loginFormOpen = payload;
     },
   },
 });
 
 const { reducer, actions } = loginSlice;
 export default reducer;
-export const { setLoginLoading, setLoginErrors } = actions;
+export const { setLoginLoading, setLoginErrors, setLoginFormOpen } = actions;

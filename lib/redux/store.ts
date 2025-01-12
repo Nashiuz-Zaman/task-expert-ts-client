@@ -13,6 +13,7 @@ import filterReducer from "@/lib/redux/features/filter/filterSlice";
 import sortReducer from "@/lib/redux/features/sort/sortSlice";
 import loginReducer from "@/lib/redux/features/login/loginSlice";
 import signupReducer from "@/lib/redux/features/signup/signupSlice";
+import passwordResetReducer from "@/lib/redux/features/passwordReset/passwordResetSlice";
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
     backdrop: backdropReducer,
     mediaQuery: mediaQueryReducer,
     mobileNav: mobileNavReducer,
+    passwordReset: passwordResetReducer,
     // form: formReducer,
     dashboard: dashboardReducer,
     task: taskReducer,

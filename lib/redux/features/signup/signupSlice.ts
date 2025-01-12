@@ -5,12 +5,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface SignupSlice {
   signupLoading: boolean;
-  signupErrors: string | string[] | null;
+  signupErrors: string[] | null;
+  signupFormOpen: boolean;
 }
 
 const initialState: SignupSlice = {
   signupLoading: false,
   signupErrors: null,
+  signupFormOpen: false,
 };
 
 const signupSlice = createSlice({
@@ -29,9 +31,15 @@ const signupSlice = createSlice({
     ): void => {
       state.signupErrors = payload;
     },
+    setSignupFormOpen: (
+      state: SignupSlice,
+      { payload }: PayloadAction<SignupSlice["signupFormOpen"]>
+    ): void => {
+      state.signupFormOpen = payload;
+    },
   },
 });
 
 const { reducer, actions } = signupSlice;
 export default reducer;
-export const { setSignupLoading, setSignupErrors } = actions;
+export const { setSignupLoading, setSignupErrors, setSignupFormOpen } = actions;
