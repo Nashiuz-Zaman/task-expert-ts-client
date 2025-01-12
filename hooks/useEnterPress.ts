@@ -1,34 +1,40 @@
-'use client';
+"use client";
 
 // react
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-const useEnterPress = (condition, callbackFunc = null) => {
-   useEffect(() => {
-      let eventTimer;
-      let handler;
- 
-      if (condition) {
-         handler = e => {
-            if (e.key.toLowerCase() === 'enter') {
-               e.preventDefault();         
-               callbackFunc && callbackFunc();
-            }
-         };
+type CallbackFunction = (() => void) | null;
 
-         eventTimer = setTimeout(() => {
-            window.addEventListener('keydown', handler);
-            clearTimeout(eventTimer);
-         }, 150);
-      } else {
-         window.removeEventListener('keydown', handler);
-      }
+const useEnterPress = (
+  condition: boolean,
+  callbackFunc: CallbackFunction = null
+) => {
+  useEffect(() => {
+    let eventTimer: ReturnType<typeof setTimeout>;
+    let handler: ((e: KeyboardEvent) => void) | null = null;
 
-      return () => {
-         clearTimeout(eventTimer);
-         window.removeEventListener('keydown', handler);
+    if (condition) {
+      handler = (e) => {
+        if (e.key.toLowerCase() === "enter") {
+          e.preventDefault();
+          if (callbackFunc) callbackFunc();
+        }
       };
-   }, [condition, callbackFunc]);
+
+      eventTimer = setTimeout(() => {
+        if (handler) window.addEventListener("keydown", handler);
+
+        clearTimeout(eventTimer);
+      }, 150);
+    } else {
+      if (handler) window.removeEventListener("keydown", handler);
+    }
+
+    return () => {
+      clearTimeout(eventTimer);
+      if (handler) window.removeEventListener("keydown", handler);
+    };
+  }, [condition, callbackFunc]);
 };
 
 export default useEnterPress;

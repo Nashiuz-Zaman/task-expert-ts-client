@@ -101,7 +101,7 @@ const PasswordResetForm = ({ modifyClasses = "" }) => {
           )}
 
         <div className="flex flex-col sm:flex-row items-center sm:justify-between mt-5">
-          <ButtonBtn className="block mx-auto sm:mx-0 mb-5 sm:mb-0">
+          <ButtonBtn className="block mx-auto sm:mx-0 mb-5 sm:mb-0 rounded-full primary-theme">
             Send Email
           </ButtonBtn>
 

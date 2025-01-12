@@ -6,6 +6,13 @@ interface IOnClickFunctionBtn {
   onClickFunction?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
+
+
+type FormAndBackdropOpenFunction = (
+  formOpen: boolean,
+  backdropOpen?: boolean | null
+) => void;
+
 interface IinputFieldType {
   placeholder: string;
   name: string;

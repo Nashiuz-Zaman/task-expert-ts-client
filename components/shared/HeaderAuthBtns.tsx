@@ -17,8 +17,8 @@ interface Data {
 }
 
 interface Functions {
-  openLoginFormWithBackdrop: (withBackdrop?: boolean) => void;
-  openSignupFormWithBackdrop: (withBackdrop?: boolean) => void;
+  setLoginFormAndBackdropOpen: FormAndBackdropOpenFunction;
+  setSignupFormAndBackdropOpen: FormAndBackdropOpenFunction;
 }
 
 interface IProps extends IExtraClassNames {
@@ -32,6 +32,8 @@ const HeaderAuthBtns = ({
   className = "",
 }: IProps) => {
   const btnClasses = "hover:underline";
+  const { setLoginFormAndBackdropOpen, setSignupFormAndBackdropOpen } =
+    functions as Functions;
 
   return (
     <div className="bg-primaryLight h-[3rem] text-white flex items-center">
@@ -53,14 +55,20 @@ const HeaderAuthBtns = ({
           <>
             <ButtonBtnTrans
               className={btnClasses}
-              onClickFunction={() => functions?.openLoginFormWithBackdrop()}
+              onClickFunction={() => {
+                setLoginFormAndBackdropOpen(true, true);
+                setSignupFormAndBackdropOpen(false);
+              }}
             >
               <IcfyIcon icon="stash:signin-alt" className="text-2xl" /> Login
             </ButtonBtnTrans>
             |
             <ButtonBtnTrans
               className={btnClasses}
-              onClickFunction={() => functions?.openLoginFormWithBackdrop()}
+              onClickFunction={() => {
+                setSignupFormAndBackdropOpen(true, true);
+                setLoginFormAndBackdropOpen(false);
+              }}
             >
               <IcfyIcon
                 icon="material-symbols-light:app-registration-rounded"

@@ -19,7 +19,7 @@ const PasswordResetModal = () => {
   const { passwordResetFormOpen } = useSelector(
     (store: RootState) => store.passwordReset
   );
-  const { closePasswordResetFormWithBackdrop } = useFormVisiblity();
+  const { setPasswordResetFormAndBackdropOpen } = useFormVisiblity();
   const { stopYAxisScrolling } = useStopScrolling();
 
   useEffect(() => {
@@ -32,9 +32,9 @@ const PasswordResetModal = () => {
       if (target.closest(".password-reset-custom-focus")) {
         return;
       }
-      closePasswordResetFormWithBackdrop();
+      setPasswordResetFormAndBackdropOpen(false, false);
     },
-    [closePasswordResetFormWithBackdrop]
+    [setPasswordResetFormAndBackdropOpen]
   );
   useClickOutside(passwordResetFormOpen, handleClickOutside);
 

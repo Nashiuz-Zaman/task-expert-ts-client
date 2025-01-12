@@ -42,10 +42,10 @@ const SignupForm = ({ className }: IExtraClassNames) => {
 
   return (
     <div
-      className={`w-full bg-white mx-auto p-5 md:py-7 2md:px-6 2md:py-12 ${className}`}
+      className={`w-full bg-white mx-auto p-5 md:py-7 2md:px-6 lg:px-8 2md:py-12 ${className}`}
     >
       {/* heading */}
-      <h2 className="capitalize mb-7 text-center font-bold text-lg 2md:text-xl xl:text-2xl">
+      <h2 className="capitalize mb-7 text-center font-semibold text-lg 2md:text-xl xl:text-2xl">
         Sign up. It&apos;s <span className="text-primary">Free!</span>
       </h2>
 
@@ -84,16 +84,16 @@ const SignupForm = ({ className }: IExtraClassNames) => {
           </div>
         )}
 
-        <ButtonBtn className="mx-auto block my-5 rounded-full">
+        <ButtonBtn className="mx-auto block my-5 rounded-full primary-theme">
           Sign Up
         </ButtonBtn>
 
-        <p className="text-sm text-center xl:text-base mb-3 md:mb-4">
+        <p className="text-sm text-center xl:text-base mb-3 md:mb-4 flex gap-1 justify-center">
           Already have an account?{" "}
           <ButtonBtnTrans
-            className="text-primary font-semibold"
+            className="text-primary font-semibold hover:underline"
             onClickFunction={(e) => {
-              e!.preventDefault();
+              e?.preventDefault();
               setSignupFormAndBackdropOpen(false);
               setLoginFormAndBackdropOpen(true);
             }}

@@ -4,7 +4,7 @@
 import { useEffect, useRef } from "react";
 
 // component
-import { ButtonBtn, GoogleBtn } from "@/components/buttons";
+import { ButtonBtn, ButtonBtnTrans, GoogleBtn } from "@/components/buttons";
 import { Inputfield } from "@/components/shared";
 
 // hooks
@@ -44,11 +44,11 @@ const LoginForm = ({ modifyClasses = "" }) => {
 
   return (
     <div
-      className={`w-full bg-white mx-auto p-5 md:py-7 2md:px-6 2md:py-12 ${modifyClasses}`}
+      className={`w-full bg-white mx-auto p-5 md:py-7 2md:px-6 lg:px-8 2md:py-12 ${modifyClasses}`}
     >
       {/* heading */}
-      <h2 className="capitalize mb-4 text-center text-lg 2md:text-xl xl:text-2xl font-bold">
-        Login to your account
+      <h2 className="capitalize mb-4 lg:mb-6 text-center text-lg 2md:text-xl xl:text-2xl font-semibold">
+        Login to Account
       </h2>
 
       <form
@@ -75,7 +75,7 @@ const LoginForm = ({ modifyClasses = "" }) => {
                 setLoginFormAndBackdropOpen(false);
                 setPasswordResetFormAndBackdropOpen(true);
               }}
-              className="w-max block ml-auto text-primary text-sm xl:text-base"
+              className="w-max block ml-auto text-primary text-sm xl:text-base hover:underline"
             >
               Forgot password?
             </button>
@@ -98,20 +98,22 @@ const LoginForm = ({ modifyClasses = "" }) => {
           </div>
         )}
 
-        <ButtonBtn className="mx-auto block my-5">Sign In</ButtonBtn>
+        <ButtonBtn className="mx-auto block my-5 rounded-full primary-theme">
+          Sign In
+        </ButtonBtn>
 
-        <p className="text-sm text-center xl:text-base mb-3 md:mb-4">
+        <p className="text-sm text-center xl:text-base mb-3 md:mb-4 flex gap-1 justify-center">
           Don&apos;t have an account?{" "}
-          <button
-            onClick={(e) => {
-              e.preventDefault();
+          <ButtonBtnTrans
+            onClickFunction={(e) => {
+              e?.preventDefault();
               setLoginFormAndBackdropOpen(false);
               setSignupFormAndBackdropOpen(true);
             }}
-            className="text-primary font-semibold"
+            className="text-primary font-semibold hover:underline"
           >
             Register
-          </button>
+          </ButtonBtnTrans>
         </p>
       </form>
 

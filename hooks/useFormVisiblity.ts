@@ -19,8 +19,9 @@ import { setBackdropOpen } from "@/lib/redux/features/backdrop/backdropSlice";
 const useFormVisiblity = () => {
   const dispatch = useDispatch();
 
-  const setLoginFormAndBackdropOpen = useCallback(
-    (formOpen: boolean, backdropOpen: boolean | null = null) => {
+  const setLoginFormAndBackdropOpen: FormAndBackdropOpenFunction = useCallback(
+    (formOpen, backdropOpen = null) => {
+   
       dispatch(setLoginFormOpen(formOpen));
 
       if (backdropOpen !== null) {
@@ -30,8 +31,8 @@ const useFormVisiblity = () => {
     [dispatch]
   );
 
-  const setSignupFormAndBackdropOpen = useCallback(
-    (formOpen: boolean, backdropOpen: boolean | null = null) => {
+  const setSignupFormAndBackdropOpen: FormAndBackdropOpenFunction = useCallback(
+    (formOpen, backdropOpen = null) => {
       dispatch(setSignupFormOpen(formOpen));
 
       if (backdropOpen !== null) {
@@ -55,16 +56,17 @@ const useFormVisiblity = () => {
     [dispatch]
   );
 
-  const setPasswordResetFormAndBackdropOpen = useCallback(
-    (formOpen: boolean, backdropOpen: boolean | null = null) => {
-      dispatch(setPasswordResetFormOpen(formOpen));
-      
-      if (backdropOpen !== null) {
-        dispatch(setBackdropOpen(backdropOpen));
-      }
-    },
-    [dispatch]
-  );
+  const setPasswordResetFormAndBackdropOpen: FormAndBackdropOpenFunction =
+    useCallback(
+      (formOpen, backdropOpen = null) => {
+        dispatch(setPasswordResetFormOpen(formOpen));
+
+        if (backdropOpen !== null) {
+          dispatch(setBackdropOpen(backdropOpen));
+        }
+      },
+      [dispatch]
+    );
 
   //   const openTaskDetailsPanel = useCallback(
   //     (withBackdrop = true): void => {

@@ -11,7 +11,7 @@ interface IProps {
 const LoginFormWithImage = ({ image }: IProps) => {
   return (
     <div
-      className={`grid grid-cols-1 2md:grid-cols-[1fr_max-content] rounded-2xl overflow-hidden mx-auto w-[17.875rem] xs:w-max 2md:w-[47.5rem] lg:w-[55rem] shadow-medium login-custom-focus`}
+      className={`grid grid-cols-1 2md:grid-cols-[60%_auto] rounded-2xl overflow-hidden mx-auto w-[17.875rem] xs:w-max 2md:w-[47.5rem] lg:w-[55rem] shadow-medium login-custom-focus`}
     >
       {/* image */}
       <div className="hidden 2md:block w-full h-full overflow-hidden">

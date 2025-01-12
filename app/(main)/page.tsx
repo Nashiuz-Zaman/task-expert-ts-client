@@ -2,12 +2,11 @@
 import InnerContainer from "@/components/containers/InnerContainer";
 import { About, Features, Faq } from "@/components/page-specific/home";
 import Banner from "@/components/shared/Banner/Banner";
-// import LoginModal from '@/components/forms/LoginModal/LoginModal';
-// import RegistrationModal from '@/components/forms/RegistrationModal/RegistrationModal';
-// import PasswordResetModal from '@/components/forms/PasswordResetModal/PasswordResetModal';
-// import About from '@/components/page-related/home/About/About';
-// import Features from '@/components/page-related/home/Features/Features';
-// import Faq from '@/components/page-related/home/Faq/Faq';
+import {
+  LoginModal,
+  SignupModal,
+  PasswordResetModal,
+} from "@/components/modals";
 
 const Home = () => {
   return (
@@ -34,15 +33,12 @@ const Home = () => {
         <Faq />
       </section>
 
-      {/*
-       */}
-
       {/* forms */}
-      {/* <InnerContainer>
-            <LoginModal />
-            <RegistrationModal />
-            <PasswordResetModal />
-         </InnerContainer> */}
+      <InnerContainer>
+        <LoginModal />
+        <SignupModal />
+        <PasswordResetModal />
+      </InnerContainer>
     </>
   );
 };

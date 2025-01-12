@@ -16,12 +16,12 @@ import useEnterPress from "@/hooks/useEnterPress";
 import { useSelector } from "react-redux";
 
 // data
-import loginImg from "./../../../assets/forms/login.webp";
+import loginImg from "@/assets/forms/login.webp";
 import { RootState } from "@/lib/redux/store";
 
 const LoginModal = () => {
   const { loginFormOpen } = useSelector((store: RootState) => store.login);
-  const { closeLoginFormWithBackdrop } = useFormVisiblity();
+  const { setLoginFormAndBackdropOpen } = useFormVisiblity();
   const { stopYAxisScrolling } = useStopScrolling();
 
   useEffect(() => {
@@ -40,9 +40,9 @@ const LoginModal = () => {
         return;
       }
 
-      closeLoginFormWithBackdrop();
+      setLoginFormAndBackdropOpen(false, false);
     },
-    [closeLoginFormWithBackdrop]
+    [setLoginFormAndBackdropOpen]
   );
   useClickOutside(loginFormOpen, handleClickOutside);
   useEnterPress(loginFormOpen);

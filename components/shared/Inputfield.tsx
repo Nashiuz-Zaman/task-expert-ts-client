@@ -6,6 +6,7 @@ import { useState } from "react";
 // lib
 import { Icon } from "@iconify/react";
 import modifyComponentClassName from "@/utils/modifyComponentClassName";
+import IcfyIcon from "./IcfyIcon";
 
 interface IProps extends IExtraClassNames, IOnChangeInput, IinputFieldType {
   labelText?: string;
@@ -71,12 +72,11 @@ const Inputfield = ({
             <button
               onClick={(e) => {
                 e.preventDefault();
-
                 setPassHidden((prev) => !prev);
               }}
-              className={`flex items-center gap-1 ml-auto mr-1 text-inherit ${passwordVisibilityIconBoxClassName}`}
+              className={`flex items-center gap-1 ml-auto mr-1 text-inherit mb-1 ${passwordVisibilityIconBoxClassName}`}
             >
-              <Icon
+              <IcfyIcon
                 icon={passHidden ? "mdi:eye" : "el:eye-close"}
                 className={passwordVisibilityIconClassName}
               />
@@ -88,7 +88,7 @@ const Inputfield = ({
       )}
 
       <div
-        className={`bg-white border border-neutral-300 p-2 items-center w-full lg:px-4 lg:py-3 ${
+        className={`bg-white border rounded-md border-neutral-300 p-2 items-center w-full lg:px-4 lg:py-3 ${
           icon
             ? `grid ${
                 invertIconPosition

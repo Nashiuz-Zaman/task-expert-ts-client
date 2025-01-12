@@ -15,12 +15,12 @@ import useStopScrolling from "@/hooks/useStopScrolling";
 import { useSelector } from "react-redux";
 
 // data
-import registrationImg from "./../../../assets/forms/registration.webp";
+import signupImg from "@/assets/forms/signup.webp";
 import { RootState } from "@/lib/redux/store";
 
 const RegistrationModal = () => {
   const { signupFormOpen } = useSelector((store: RootState) => store.signup);
-  const { closeSignupFormWithBackdrop } = useFormVisiblity();
+  const { setSignupFormAndBackdropOpen } = useFormVisiblity();
   const { stopYAxisScrolling } = useStopScrolling();
 
   useEffect(() => {
@@ -38,9 +38,9 @@ const RegistrationModal = () => {
         return;
       }
 
-      closeSignupFormWithBackdrop();
+      setSignupFormAndBackdropOpen(false, false);
     },
-    [closeSignupFormWithBackdrop]
+    [setSignupFormAndBackdropOpen]
   );
   useClickOutside(signupFormOpen, handleClickOutside);
 
@@ -50,7 +50,7 @@ const RegistrationModal = () => {
         signupFormOpen ? "!opacity-100 !visible !-translate-y-1/2" : ""
       }`}
     >
-      <SignupFormWithImage image={registrationImg} />
+      <SignupFormWithImage image={signupImg} />
     </div>
   );
 };

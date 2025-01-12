@@ -11,7 +11,7 @@ import { CloseBtn, MobileMenuBtn } from "../buttons";
 import BrandLogo from "./BrandLogo";
 
 // hook
-import { useClickOutside } from "@/hooks";
+import { useClickOutside, useStopScrolling } from "@/hooks";
 // import useMobileNavigation from "@/hooks/useMobileNavigation";
 // import useEscapeClose from "@/hooks/useEscapeClose";
 // import useLoginMethods from "@/hooks/useLoginMethods";
@@ -26,17 +26,18 @@ import { RootState } from "@/lib/redux/store";
 import logoPrimary from "@/assets/websiteLogo/logo-primary.webp";
 import { useMobileNavigation } from "@/hooks";
 import modifyComponentClassName from "@/utils/modifyComponentClassName";
+import { useEffect } from "react";
 
 const MobileNav = ({ className = "" }: IExtraClassNames) => {
   const { profileData } = useSelector((store: RootState) => store.auth);
   const { mobileNavOpen } = useSelector((store: RootState) => store.mobileNav);
   const { setMobileNavBackdropOpen } = useMobileNavigation();
   // const { handleLogout } = useLoginMethods();
-  // const { stopYAxisScrolling } = useStopScrolling();
+  const { stopYAxisScrolling } = useStopScrolling();
 
-  // useEffect(() => {
-  //   stopYAxisScrolling(mobileNavOpen);
-  // }, [mobileNavOpen, stopYAxisScrolling]);
+  useEffect(() => {
+    stopYAxisScrolling(mobileNavOpen);
+  }, [mobileNavOpen, stopYAxisScrolling]);
 
   const handleClickOutside: (e: MouseEvent) => void = (e) => {
     if (!(e.target as Element).closest(".mobilenav-focus")) {

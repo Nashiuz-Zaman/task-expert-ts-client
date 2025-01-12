@@ -12,8 +12,7 @@ const HeaderBlock = () => {
   const { profileData, profileLoading } = useSelector(
     (store: RootState) => store.auth
   );
-
-  const { openLoginFormWithBackdrop, openSignupFormWithBackdrop } =
+  const { setLoginFormAndBackdropOpen, setSignupFormAndBackdropOpen } =
     useFormVisiblity();
 
   return (
@@ -21,11 +20,11 @@ const HeaderBlock = () => {
       <HeaderAuthBtns
         data={{ profileData, profileLoading }}
         functions={{
-          openLoginFormWithBackdrop,
-          openSignupFormWithBackdrop,
+          setLoginFormAndBackdropOpen,
+          setSignupFormAndBackdropOpen,
         }}
       />
-      
+
       <InnerContainer>
         <Header logo={logoPrimary} />
       </InnerContainer>

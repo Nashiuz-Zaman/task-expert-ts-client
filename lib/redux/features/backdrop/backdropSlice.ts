@@ -1,20 +1,27 @@
-'use client';
+"use client";
 
 // imports
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
-   backdropOpen: false,
+interface IBackdropSlice {
+  backdropOpen: boolean;
+}
+
+const initialState: IBackdropSlice = {
+  backdropOpen: false,
 };
 
 const backdropSlice = createSlice({
-   name: 'backdrop',
-   initialState,
-   reducers: {
-      setBackdropOpen: (state, { payload }) => {
-         state.backdropOpen = payload;
-      },
-   },
+  name: "backdrop",
+  initialState,
+  reducers: {
+    setBackdropOpen: (
+      state: IBackdropSlice,
+      { payload }: PayloadAction<IBackdropSlice["backdropOpen"]>
+    ) => {
+      state.backdropOpen = payload;
+    },
+  },
 });
 
 const { actions, reducer } = backdropSlice;
