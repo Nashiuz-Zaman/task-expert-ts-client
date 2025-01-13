@@ -8,9 +8,11 @@ import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Slide } from "react-toastify";
- 
+
 // redux store
 import StoreProvider from "@/lib/redux/StoreProvider";
+import { checkAuth } from "@/utils/appInit";
+import { cookies } from "next/headers";
 
 // init font
 const inter = Inter({ subsets: ["latin"] });
@@ -21,15 +23,22 @@ export const metadata: Metadata = {
     "Task Expert is all you'll ever need for seamless workflow management of your everyday responsibilities",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // get cookie and send them in the HTTP request
+  const cookieStr = (await cookies()).toString();
+  const data = await checkAuth(cookieStr);
+  console.log(data);
+
   return (
     <html lang="en">
       <body className={`${inter.className} text-neutral-800 antialiased`}>
-        <StoreProvider>
+        <StoreProvider
+          initialAuthData={data.status === "failure" ? null : data.user}
+        >
           {/* react toastify */}
           <ToastContainer
             position="bottom-left"

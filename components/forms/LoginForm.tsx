@@ -20,10 +20,7 @@ const LoginForm = ({ modifyClasses = "" }) => {
     (store: RootState) => store.login
   );
 
-  const {
-    handleLoginEmail,
-    // handleLoginGoogle
-  } = useLoginMethods();
+  const { handleLoginEmail, handleLoginGoogle } = useLoginMethods();
   const { resetFormFieldsAndErrors } = useResetForm();
   const {
     setLoginFormAndBackdropOpen,
@@ -85,10 +82,10 @@ const LoginForm = ({ modifyClasses = "" }) => {
         {/* show errors here */}
         {Array.isArray(loginErrors) && loginErrors?.length > 0 && (
           <div className="space-y-1 mt-3 md:mt-4">
-            {loginErrors.map((error) => {
+            {loginErrors.map((error, i) => {
               return (
                 <p
-                  key={error}
+                  key={i}
                   className="text-sm text-center font-semibold text-red-600"
                 >
                   * {error}
@@ -121,7 +118,7 @@ const LoginForm = ({ modifyClasses = "" }) => {
 
       <GoogleBtn
         onClickFunction={() => {
-          //  handleLoginGoogle();
+          handleLoginGoogle();
         }}
         className="w-max mx-auto"
       />

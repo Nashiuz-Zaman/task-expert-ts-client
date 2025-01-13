@@ -17,7 +17,6 @@ import {
 import app from "@/lib/firebase/firebase.config";
 
 // auth and google auth provider
-// create auth & google provider instance
 export const auth = getAuth(app);
 export const googleAuthProvider = new GoogleAuthProvider();
 
@@ -39,17 +38,17 @@ const useFirebaseMethods = () => {
       .catch(() => console.error("Error occurred"));
   }, [router]);
 
-  // delete user
+  // delete user;
   // const deleteUserAccount = useCallback(() => {
-  //    const user = auth.currentUser;
+  //   const user = auth.currentUser;
 
-  //    return deleteUser(user)
-  //       .then(() => {
-  //          return { status: 'success' };
-  //       })
-  //       .catch(error => {
-  //          throw new Error(error.message);
-  //       });
+  //   return deleteUser(user)
+  //     .then(() => {
+  //       return { status: "success" };
+  //     })
+  //     .catch((error) => {
+  //       throw new Error(error.message);
+  //     });
   // }, []);
 
   return {

@@ -9,7 +9,7 @@ import useFormVisiblity from "./useFormVisiblity";
 
 // redux
 import useRedux from "./useRedux";
-import { setProfileData } from "@/lib/redux/features/auth/authSlice";
+import { AuthState, setProfileData } from "@/lib/redux/features/auth/authSlice";
 import {
   setLoginLoading,
   setLoginErrors,
@@ -21,52 +21,57 @@ import { showToast } from "@/utils/showToast";
 // type
 import { RootState } from "@/lib/redux/store";
 import { axiosCustom } from "@/utils/axios";
+import { showNetworkErr } from "@/utils/showNetworkErr";
+import axios, { AxiosError } from "axios";
 
 const useLoginMethods = () => {
   const { dispatch, useSelector } = useRedux();
   const { profileData } = useSelector((store: RootState) => store.auth);
   const { loginEmail, loginGoogle, logout } = useFirebaseMethods();
-  const { closeLoginFormWithBackdrop, closeSignupFormWithBackdrop } =
+  const { setLoginFormAndBackdropOpen, setSignupFormAndBackdropOpen } =
     useFormVisiblity();
   const router = useRouter();
 
   // handle google sign in
-  //   const handleLoginGoogle = async () => {
-  //     dispatch(setLoginLoading(true));
-  //     const result = await loginGoogle();
+  const handleLoginGoogle = async () => {
+    // reset errors
+    dispatch(setLoginErrors(null));
+    dispatch(setLoginLoading(true));
+    try {
+      const result = await loginGoogle();
 
-  //     // if google login is succesful send the google user object to the database to check role and existence and also to make a jwt token
-  //     if (result.user) {
-  //       const googleUser = {
-  //         name: result.user.displayName,
-  //         email: result.user.email,
-  //         image: result.user.photoURL,
-  //       };
+      if (result?.user) {
+        const googleUser: Partial<AuthState["profileData"]> = {
+          name: result?.user?.displayName as string,
+          email: result?.user?.email as string,
+        };
 
-  //       // check with database if the google user already exists
-  //       const googleLoginResponse = await axiosCustom.post(
-  //         "/google-login",
-  //         googleUser
-  //       );
+        const googleLoginResponse = await axiosCustom.post(
+          "/google-auth",
+          googleUser
+        );
 
-  //       if (googleLoginResponse.data.status === "success") {
-  //         const profileData = googleLoginResponse.data.user;
-  //         // set profile data, user should exist and the jwt token
-  //         dispatch(setProfileData(profileData));
+        if (googleLoginResponse?.data?.status === "success") {
+          const profileData = googleLoginResponse.data.user;
 
-  //         localStorage.setItem("token", googleLoginResponse.data.token);
-  //         localStorage.setItem("email", googleLoginResponse.data.user.email);
+          dispatch(setProfileData(profileData));
+          setLoginFormAndBackdropOpen(false, false);
+          setSignupFormAndBackdropOpen(false, false);
 
-  //         closeLoginFormWithBackdrop();
-  //         closeSignupFormWithBackdrop();
+          showToast({ message: "Logged In Successfully" });
+        }
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        dispatch(setLoginErrors([error?.response?.data?.message]));
+        return;
+      }
 
-  //         router.push("/");
-
-  //         showToast("Logged In Successfully", "success");
-  //         dispatch(setLoginLoading(false));
-  //       }
-  //     }
-  //   };
+      showNetworkErr();
+    } finally {
+      dispatch(setLoginLoading(false));
+    }
+  };
 
   // handle normal login
   const handleLoginEmail = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -95,15 +100,13 @@ const useLoginMethods = () => {
       if (loginResponse.data.status === "success") {
         const profileData = loginResponse.data.user;
         dispatch(setProfileData(profileData));
-
-        closeLoginFormWithBackdrop();
-
+        setLoginFormAndBackdropOpen(false, false);
         router.push("/");
 
         showToast({ message: "Logged In Successfully" });
       }
     } catch {
-      dispatch(setLoginErrors("Email/Password doesn't match. Try again."));
+      dispatch(setLoginErrors(["Email/Password doesn't match. Try again."]));
     } finally {
       dispatch(setLoginLoading(false));
     }
@@ -137,7 +140,7 @@ const useLoginMethods = () => {
 
   return {
     handleLoginEmail,
-    //  handleLoginGoogle,
+    handleLoginGoogle,
     //  handleLogout,
   };
 };

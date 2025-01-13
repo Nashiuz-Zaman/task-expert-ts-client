@@ -81,12 +81,14 @@ const HeaderAuthBtns = ({
         {/* if user available then show name and go to dashboard and logout btns */}
         {!data?.profileLoading && data?.profileData && (
           <>
-            <p>
-              Logged in as: <span className="font-semibold">Nashiuz Zaman</span>
+            <p className="inline-flex items-center gap-1">
+              <IcfyIcon icon="mdi:user" className="text-2xl" />
+
+              <span className="font-semibold">{data.profileData.name}</span>
             </p>
             <Link
               href={`/manage-tasks?id=1`}
-              className={`${btnClasses} underline text-primary`}
+              className={`${btnClasses} underline underline-offset-[3px] text-white`}
             >
               Visit Dashboard
             </Link>
