@@ -8,7 +8,7 @@ import useRedux from "./useRedux";
 
 // redux
 import {
-  AuthState,
+  IAuthState,
   setProfileData,
   setProfileLoading,
 } from "@/lib/redux/features/auth/authSlice";
@@ -18,7 +18,7 @@ import { axiosCustom } from "@/utils/axios";
 
 interface AppInitResponse {
   status: "success" | "failure";
-  user?: AuthState["profileData"];
+  user?: IAuthState["profileData"];
 }
 
 const useAuth = (): void => {

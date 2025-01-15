@@ -6,3 +6,5 @@ export { default as CloseBtn } from "./CloseBtn";
 export { default as MobileMenuBtn } from "./MobileMenuBtn";
 export { default as ButtonBtnTrans } from "./ButtonBtnTrans";
 export { default as GoogleBtn } from "./GoogleBtn";
+export { default as UnpinBtn } from "./UnpinBtn";
+export { default as LinkBtnTrans } from "./LinkBtnTrans";

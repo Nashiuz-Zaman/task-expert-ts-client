@@ -6,7 +6,7 @@ import { Header, HeaderAuthBtns } from "../shared";
 import { useFormVisiblity } from "@/hooks";
 import { RootState } from "@/lib/redux/store";
 import InnerContainer from "../containers/InnerContainer";
-import logoPrimary from "@/assets/websiteLogo/logo-primary.webp";
+import { logoPrimaryExport } from "@/uiData/imageExports";
 
 const HeaderBlock = () => {
   const { profileData, profileLoading } = useSelector(
@@ -26,7 +26,7 @@ const HeaderBlock = () => {
       />
 
       <InnerContainer>
-        <Header logo={logoPrimary} />
+        <Header logo={logoPrimaryExport} />
       </InnerContainer>
     </header>
   );

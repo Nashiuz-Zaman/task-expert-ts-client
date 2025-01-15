@@ -3,20 +3,20 @@
 // import
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface User {
+interface IUser {
   name: string;
   email: string;
   password: string;
   image: string;
-  role: string;
+  _id?: string;
 }
 
-export interface AuthState {
-  profileData: User | null;
+export interface IAuthState {
+  profileData: IUser | null;
   profileLoading: boolean;
 }
 
-const initialState: AuthState = {
+const initialState: IAuthState = {
   profileData: null,
   profileLoading: false,
 };
@@ -26,14 +26,14 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setProfileData: (
-      state: AuthState,
-      { payload }: PayloadAction<AuthState["profileData"]>
+      state: IAuthState,
+      { payload }: PayloadAction<IAuthState["profileData"]>
     ) => {
       state.profileData = payload;
     },
     setProfileLoading: (
-      state: AuthState,
-      { payload }: PayloadAction<AuthState["profileLoading"]>
+      state: IAuthState,
+      { payload }: PayloadAction<IAuthState["profileLoading"]>
     ) => {
       state.profileLoading = payload;
     },

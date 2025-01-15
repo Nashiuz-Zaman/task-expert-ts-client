@@ -13,8 +13,8 @@ export const showToast = ({
   className?: string;
 }) => {
   toast(message ? message : "No message provided", {
-    position: position ? position : "top-center",
-    autoClose: 2500,
+    position: position ? position : "bottom-left",
+    autoClose: 2700,
     hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,

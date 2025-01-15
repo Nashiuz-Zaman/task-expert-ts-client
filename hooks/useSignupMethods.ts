@@ -1,15 +1,11 @@
 "use client";
 
-// next
-import { useRouter } from "next/navigation";
-
 // hooks
-import useFirebaseMethods from "./useFirebaseMethods";
+
 import useFormVisiblity from "./useFormVisiblity";
 
 // redux
 import { useDispatch } from "react-redux";
-import { setProfileData } from "@/lib/redux/features/auth/authSlice";
 
 // utils
 import { axiosCustom } from "@/utils/axios";
@@ -19,18 +15,16 @@ import {
 } from "@/lib/redux/features/signup/signupSlice";
 import { FormEvent } from "react";
 import { validatePassword } from "@/utils/validatePassword";
+import axios from "axios";
+import { showNetworkErr } from "@/utils/showNetworkErr";
+import { setOTPFormOpen } from "@/lib/redux/features/OTP/OTPSlice";
 
 // custom hook body starts here
 const useSignupMethods = () => {
-  // initial data and function extractions
   const dispatch = useDispatch();
-
-  const router = useRouter();
-  const { closeSignupFormWithBackdrop } = useFormVisiblity();
 
   // function to run when the form is submitted
   const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
     // reset errors
     dispatch(setSignupErrors(null));
 
@@ -49,54 +43,28 @@ const useSignupMethods = () => {
     }
 
     // if there are no basic errors code will reach this line
-    // try {
-    //   dispatch(setSignupLoading(true));
-    //   const userExistsResponse = await axiosCustom.post("/users/check-user", {
-    //     email,
-    //   });
+    try {
+      dispatch(setSignupLoading(true));
+      const res = await axiosCustom.post("/users", {
+        name,
+        email,
+        password,
+      });
 
-    //   // if user exists
-    //   if (userExistsResponse.data.userExists) {
-    //     dispatch(setUserAlreadyRegistered(true));
-    //     dispatch(setRegistrationLoading(false));
-    //   } else {
-    //     const signupResponse = await signup(
-    //       dataObject.email,
-    //       dataObject.password
-    //     );
+      if (res?.data?.status === "success") {
+        dispatch(setOTPFormOpen(true));
+      }
+    } catch (error) {
+      if (error) {
+        if (axios.isAxiosError(error))
+          dispatch(setSignupErrors([error?.response?.data?.message]));
+        return;
+      }
 
-    //     if (signupResponse.user) {
-    //       // if firebase sign up successful update the profile first
-    //       await updateFirebaseProfile(dataObject.userName, "");
-
-    //       const user = {
-    //         name: dataObject.userName,
-    //         password: dataObject.password,
-    //         email: dataObject.email,
-    //         imageSource: null,
-    //         role: "user",
-    //       };
-
-    //       // create user in database
-    //       const userCreationResponse = await axiosCustom.post("/users", user);
-
-    //       // if success
-    //       if (userCreationResponse.data.status === "success") {
-    //         const profileData = userCreationResponse.data.user;
-    //         dispatch(setProfileData(profileData));
-
-    //         closeSignupFormWithBackdrop();
-    //         router.push("/");
-    //       }
-    //     }
-    //   }
-    // } catch (error) {
-    //   if (error) {
-    //     dispatch(setSignupErrors([error.message]));
-    //   }
-    // } finally {
-    //   dispatch(setSignupLoading(false));
-    // }
+      showNetworkErr();
+    } finally {
+      dispatch(setSignupLoading(false));
+    }
   };
 
   return {

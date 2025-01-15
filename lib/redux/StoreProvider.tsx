@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  AuthState,
+  IAuthState,
   setProfileData,
   setProfileLoading,
 } from "./features/auth/authSlice";
@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 
 interface IProps {
   children: React.ReactNode;
-  initialAuthData: AuthState["profileData"] | null;
+  initialAuthData: IAuthState["profileData"] | null;
 }
 
 const StoreProvider = ({ children, initialAuthData }: IProps) => {

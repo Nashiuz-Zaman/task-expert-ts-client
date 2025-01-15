@@ -1,3 +1,7 @@
+interface ILayoutProps {
+  children: React.ReactNode;
+}
+
 interface IExtraClassNames {
   className?: string;
 }
@@ -5,8 +9,6 @@ interface IExtraClassNames {
 interface IOnClickFunctionBtn {
   onClickFunction?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
-
-
 
 type FormAndBackdropOpenFunction = (
   formOpen: boolean,

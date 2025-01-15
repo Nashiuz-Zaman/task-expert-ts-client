@@ -15,7 +15,7 @@ const useEnterPress = (
 
     if (condition) {
       handler = (e) => {
-        if (e.key.toLowerCase() === "enter") {
+        if (e?.key?.toLowerCase() === "enter") {
           e.preventDefault();
           if (callbackFunc) callbackFunc();
         }

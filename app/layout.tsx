@@ -11,7 +11,7 @@ import { Slide } from "react-toastify";
 
 // redux store
 import StoreProvider from "@/lib/redux/StoreProvider";
-import { checkAuth } from "@/utils/appInit";
+import { checkForLogins } from "@/utils/checkForLogins";
 import { cookies } from "next/headers";
 
 // init font
@@ -30,19 +30,19 @@ export default async function RootLayout({
 }>) {
   // get cookie and send them in the HTTP request
   const cookieStr = (await cookies()).toString();
-  const data = await checkAuth(cookieStr);
-  console.log(data);
+  const data = await checkForLogins(cookieStr);
+  
 
   return (
     <html lang="en">
       <body className={`${inter.className} text-neutral-800 antialiased`}>
         <StoreProvider
-          initialAuthData={data.status === "failure" ? null : data.user}
+          initialAuthData={data.status === "success" ? data.user : null}
         >
           {/* react toastify */}
           <ToastContainer
             position="bottom-left"
-            autoClose={2000}
+            autoClose={2700}
             transition={Slide}
             hideProgressBar
             newestOnTop

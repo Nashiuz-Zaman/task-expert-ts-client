@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
 // react
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-const useEscapeClose = (handler = null) => {
+const useEscapeClose = (handler: (() => void) | null = null) => {
   useEffect(() => {
-    const handleEscapeKey = e => {
-      if (e.key === 'Escape') {
-        handler && handler();
+    const handleEscapeKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (handler) handler();
       }
     };
 
-    window.addEventListener('keydown', handleEscapeKey);
+    window.addEventListener("keydown", handleEscapeKey);
 
     return () => {
-      window.removeEventListener('keydown', handleEscapeKey);
+      window.removeEventListener("keydown", handleEscapeKey);
     };
   }, [handler]);
 };

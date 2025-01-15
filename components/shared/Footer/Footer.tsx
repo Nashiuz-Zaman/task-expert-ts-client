@@ -10,8 +10,7 @@ import {
   socialMediaOptions,
   currentYear,
 } from "@/uiData/footerData";
-
-import logoWhite from "@/assets/websiteLogo/logo-white.webp";
+import { logoWhiteExport } from "@/uiData/imageExports";
 
 const Footer = () => {
   return (
@@ -23,7 +22,7 @@ const Footer = () => {
         <div className="mb-14 grid grid-cols-1 md:grid-cols-3">
           {/* website logo */}
           <BrandLogo
-            logo={logoWhite}
+            logo={logoWhiteExport}
             className="mx-auto mb-sectionGapSm lg:h-[3rem]"
           />
 

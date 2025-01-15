@@ -5,15 +5,16 @@ import Link from "next/link";
 import modifyComponentClassName from "@/utils/modifyComponentClassName";
 
 // type imports
-import { AuthState } from "@/lib/redux/features/auth/authSlice";
+import { IAuthState } from "@/lib/redux/features/auth/authSlice";
 import IcfyIcon from "./IcfyIcon";
 import InnerContainer from "../containers/InnerContainer";
 import { ButtonBtnTrans } from "@/components/buttons";
+import { useLoginMethods } from "@/hooks";
 
 // types
 interface Data {
-  profileData: AuthState["profileData"];
-  profileLoading: AuthState["profileLoading"];
+  profileData: IAuthState["profileData"];
+  profileLoading: IAuthState["profileLoading"];
 }
 
 interface Functions {
@@ -34,6 +35,7 @@ const HeaderAuthBtns = ({
   const btnClasses = "hover:underline";
   const { setLoginFormAndBackdropOpen, setSignupFormAndBackdropOpen } =
     functions as Functions;
+  const { handleLogout } = useLoginMethods();
 
   return (
     <div className="bg-primaryLight h-[3rem] text-white flex items-center">
@@ -47,9 +49,6 @@ const HeaderAuthBtns = ({
           } justify-center items-center 2md:justify-end text-sm xs:text-base lg:text-lg font-medium`
         )}
       >
-        {data?.profileLoading && (
-          <IcfyIcon className="text-4xl mr-8" icon="eos-icons:bubble-loading" />
-        )}
         {/* if no user then login and registration btns are shown */}
         {!data?.profileLoading && !data?.profileData && (
           <>
@@ -87,14 +86,20 @@ const HeaderAuthBtns = ({
               <span className="font-semibold">{data.profileData.name}</span>
             </p>
             <Link
-              href={`/manage-tasks?id=1`}
+              href={`/dashboard/home`}
               className={`${btnClasses} underline underline-offset-[3px] text-white`}
             >
               Visit Dashboard
             </Link>
-            <button onClick={() => {}} className={btnClasses}>
+
+            <ButtonBtnTrans
+              onClickFunction={() => {
+                handleLogout();
+              }}
+            >
+              {" "}
               Sign Out
-            </button>
+            </ButtonBtnTrans>
           </>
         )}
       </InnerContainer>

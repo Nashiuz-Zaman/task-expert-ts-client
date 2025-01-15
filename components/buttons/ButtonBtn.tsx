@@ -17,7 +17,7 @@ const ButtonBtn = ({
   onClickFunction,
   className = "",
   disabled = false,
-  id = "",
+  id,
   type = "button",
   title = "",
   ariaLabel = "button",

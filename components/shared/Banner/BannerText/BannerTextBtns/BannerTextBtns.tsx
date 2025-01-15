@@ -7,10 +7,10 @@ import IcfyIcon from "@/components/shared/IcfyIcon";
 import modifyComponentClassName from "@/utils/modifyComponentClassName";
 
 // hooks
-// import useFormVisiblity from "@/hooks/useFormVisiblity";
+import { useFormVisiblity } from "@/hooks";
 
 const BannerTextBtns = ({ className = "" }: IExtraClassNames) => {
-  //   const { openSignupFormWithBackdrop } = useFormVisiblity();
+  const { setSignupFormAndBackdropOpen } = useFormVisiblity();
 
   return (
     <div
@@ -27,7 +27,9 @@ const BannerTextBtns = ({ className = "" }: IExtraClassNames) => {
       </LinkBtn>
 
       <ButtonBtn
-        onClickFunction={() => {}}
+        onClickFunction={() => {
+          setSignupFormAndBackdropOpen(true, true);
+        }}
         className="!duration-[300ms] primary-outlined-theme rounded-full px-7"
       >
         Sign Up - It&apos;s Free!

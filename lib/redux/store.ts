@@ -14,6 +14,7 @@ import sortReducer from "@/lib/redux/features/sort/sortSlice";
 import loginReducer from "@/lib/redux/features/login/loginSlice";
 import signupReducer from "@/lib/redux/features/signup/signupSlice";
 import passwordResetReducer from "@/lib/redux/features/passwordReset/passwordResetSlice";
+import OTPReducer from "@/lib/redux/features/OTP/OTPSlice";
 
 export const store = configureStore({
   reducer: {
@@ -24,7 +25,7 @@ export const store = configureStore({
     mediaQuery: mediaQueryReducer,
     mobileNav: mobileNavReducer,
     passwordReset: passwordResetReducer,
-    // form: formReducer,
+    OTP: OTPReducer,
     dashboard: dashboardReducer,
     task: taskReducer,
     search: searchReducer,

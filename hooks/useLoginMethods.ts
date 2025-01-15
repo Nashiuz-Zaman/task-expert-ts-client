@@ -9,7 +9,7 @@ import useFormVisiblity from "./useFormVisiblity";
 
 // redux
 import useRedux from "./useRedux";
-import { AuthState, setProfileData } from "@/lib/redux/features/auth/authSlice";
+import { IAuthState, setProfileData } from "@/lib/redux/features/auth/authSlice";
 import {
   setLoginLoading,
   setLoginErrors,
@@ -19,15 +19,13 @@ import {
 import { showToast } from "@/utils/showToast";
 
 // type
-import { RootState } from "@/lib/redux/store";
-import { axiosCustom } from "@/utils/axios";
+import { axiosCustom, formDataHeader } from "@/utils/axios";
 import { showNetworkErr } from "@/utils/showNetworkErr";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 const useLoginMethods = () => {
-  const { dispatch, useSelector } = useRedux();
-  const { profileData } = useSelector((store: RootState) => store.auth);
-  const { loginEmail, loginGoogle, logout } = useFirebaseMethods();
+  const { dispatch } = useRedux();
+  const { loginGoogle } = useFirebaseMethods();
   const { setLoginFormAndBackdropOpen, setSignupFormAndBackdropOpen } =
     useFormVisiblity();
   const router = useRouter();
@@ -41,9 +39,10 @@ const useLoginMethods = () => {
       const result = await loginGoogle();
 
       if (result?.user) {
-        const googleUser: Partial<AuthState["profileData"]> = {
+        const googleUser: Partial<IAuthState["profileData"]> = {
           name: result?.user?.displayName as string,
           email: result?.user?.email as string,
+          image: result?.user?.photoURL as string,
         };
 
         const googleLoginResponse = await axiosCustom.post(
@@ -76,72 +75,58 @@ const useLoginMethods = () => {
   // handle normal login
   const handleLoginEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    // reset errors
-    dispatch(setLoginErrors(null));
-
-    const form = e.target as HTMLFormElement;
-    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
-    const password = (form.elements.namedItem("password") as HTMLInputElement)
-      .value;
-
-    const dataObject = {
-      email,
-      password,
-    };
-
     try {
+      // reset errors
+      dispatch(setLoginErrors(null));
+
       dispatch(setLoginLoading(true));
 
-      const loginResponse = await axiosCustom.post("/email-login", {
-        email: dataObject.email,
-      });
+      const formdata = new FormData(e.target as HTMLFormElement);
 
-      if (loginResponse.data.status === "success") {
-        const profileData = loginResponse.data.user;
-        dispatch(setProfileData(profileData));
+      const res = await axiosCustom.post(
+        "/email-auth",
+        formdata,
+        formDataHeader
+      );
+      if (res?.data?.status === "success") {
+        dispatch(setProfileData(res?.data?.user));
         setLoginFormAndBackdropOpen(false, false);
-        router.push("/");
 
         showToast({ message: "Logged In Successfully" });
       }
-    } catch {
-      dispatch(setLoginErrors(["Email/Password doesn't match. Try again."]));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        dispatch(setLoginErrors([error?.response?.data?.message]));
+        return;
+      }
+
+      showNetworkErr();
     } finally {
       dispatch(setLoginLoading(false));
     }
   };
 
-  //   const handleLogout = async (manual = true) => {
-  //     const email = profileData?.email;
-  //     // firebase logout
-  //     const res = await logout();
+  const handleLogout = async () => {
+    try {
+      const res = await axiosCustom.get("/logout");
 
-  //     // if firebase logout is successful
-  //     if (res.status === "success") {
-  //       const logoutRes = await axiosCustom.patch("/logout", { email });
+      if (res.data.status === "success") {
+        dispatch(setProfileData(null));
+        router.push("/");
+        showToast({ message: "You logged out" });
+        return;
+      }
 
-  //       if (logoutRes.data.status === "success") {
-  //         dispatch(setProfileData(null));
-
-  //         localStorage.removeItem("token");
-  //         localStorage.removeItem("email");
-
-  //         if (manual) {
-  //           showToast("Signed Out Successfully", "success");
-  //         }
-
-  //         if (!manual) {
-  //           showToast("You Were Signed Out, Please Sign In Again", "error");
-  //         }
-  //       }
-  //     }
-  //   };
+      showNetworkErr();
+    } catch {
+      showNetworkErr();
+    }
+  };
 
   return {
     handleLoginEmail,
     handleLoginGoogle,
-    //  handleLogout,
+    handleLogout,
   };
 };
 

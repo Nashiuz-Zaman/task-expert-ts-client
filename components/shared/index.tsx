@@ -11,3 +11,5 @@ export { default as Carousel2 } from "./Carousel2/Carousel2";
 export { default as AccordionVertical } from "./AccordionVertical";
 export { default as Footer } from "./Footer/Footer";
 export { default as Inputfield } from "./Inputfield";
+export { default as ErrorsBlock } from "./ErrorsBlock";
+export { default as UserProfile } from "./UserProfile";

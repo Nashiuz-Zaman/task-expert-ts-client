@@ -46,7 +46,10 @@ const Inputfield = ({
 
   return (
     <label
-      className={`block w-full !rounded-[inherit] text-textMain ${className}`}
+      className={modifyComponentClassName(
+        className,
+        "block w-full !rounded-[inherit]"
+      )}
     >
       {(labelText || passwordField) && (
         <div
@@ -70,11 +73,12 @@ const Inputfield = ({
 
           {passwordField && (
             <button
+              tabIndex={-1}
               onClick={(e) => {
                 e.preventDefault();
                 setPassHidden((prev) => !prev);
               }}
-              className={`flex items-center gap-1 ml-auto mr-1 text-inherit mb-1 ${passwordVisibilityIconBoxClassName}`}
+              className={`flex items-center gap-1 ml-auto mr-1 text-inherit mb-2 ${passwordVisibilityIconBoxClassName}`}
             >
               <IcfyIcon
                 icon={passHidden ? "mdi:eye" : "el:eye-close"}

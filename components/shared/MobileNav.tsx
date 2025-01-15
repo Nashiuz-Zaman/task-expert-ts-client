@@ -23,10 +23,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/lib/redux/store";
 
 // data
-import logoPrimary from "@/assets/websiteLogo/logo-primary.webp";
+
 import { useMobileNavigation } from "@/hooks";
 import modifyComponentClassName from "@/utils/modifyComponentClassName";
 import { useEffect } from "react";
+import { logoPrimaryExport } from "@/uiData/imageExports";
+
 
 const MobileNav = ({ className = "" }: IExtraClassNames) => {
   const { profileData } = useSelector((store: RootState) => store.auth);
@@ -77,7 +79,7 @@ const MobileNav = ({ className = "" }: IExtraClassNames) => {
 
         {/* brand logo */}
         <BrandLogo
-          logo={logoPrimary}
+          logo={logoPrimaryExport}
           className="block w-max mx-auto sm:mx-0 sm:mr-auto mb-11 h-9"
           // onClickFunction={closeMobileNav}
         />

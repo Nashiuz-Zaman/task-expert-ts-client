@@ -7,10 +7,12 @@ import { useEffect, useCallback } from "react";
 import LoginFormWithImage from "../forms/LoginFormWithImage";
 
 // hooks
-import useClickOutside from "@/hooks/useClickOutside";
-import useFormVisiblity from "@/hooks/useFormVisiblity";
-import useStopScrolling from "@/hooks/useStopScrolling";
-import useEnterPress from "@/hooks/useEnterPress";
+import {
+  useClickOutside,
+  useFormVisiblity,
+  useStopScrolling,
+  useEnterPress,
+} from "@/hooks";
 
 // redux
 import { useSelector } from "react-redux";
