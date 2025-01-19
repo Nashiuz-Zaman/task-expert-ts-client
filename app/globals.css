@@ -16,7 +16,7 @@
   }
 
   .white-black-theme {
-    @apply bg-white border-neutral-300 shadow-small text-neutral-900;
+    @apply bg-white active:bg-neutral-100 lg:hover:bg-neutral-100 border-neutral-300 shadow-md text-neutral-900;
   }
 
   .danger-theme {
